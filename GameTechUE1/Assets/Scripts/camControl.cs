@@ -5,6 +5,7 @@ using UnityEngine;
 public class camControl : MonoBehaviour {
 
 	public GameObject player;
+	public Material mat;
 	private Vector3 offset;
 
 	// Use this for initialization
@@ -17,4 +18,10 @@ public class camControl : MonoBehaviour {
 		transform.position = player.transform.position + offset;
 
 	}
+
+	/* void OnRenderImage(RenderTexture src, RenderTexture dest){
+
+		Graphics.Blit (src, dest, mat);
+
+	} */
 }

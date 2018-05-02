@@ -5,9 +5,22 @@ using UnityEngine;
 public class BackgroundSpawner : MonoBehaviour {
 
 	Vector3 pos;
-	public float width;
+	float width = 2014f;
+	public float speed;
+	Vector3 move;
 	float newZ;
 	bool moved;
+	public GameController gc;
+
+	void Start(){
+		move = new Vector3 (0f, 0f, -speed);
+	}
+
+	void Update(){
+		if (!gc.end) {
+			transform.position += move;
+		}
+	}
 
 	void OnBecameInvisible(){
 		if (!moved) {

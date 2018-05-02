@@ -19,7 +19,7 @@ public class EnemySpawner: MonoBehaviour {
 	void Update () {
 
 		if (Time.time > t) {
-			Instantiate (enemy, transform.position, transform.rotation);
+			Instantiate (enemy, transform.position, enemy.transform.rotation);
 			t += spawnRate;
 		}
 		

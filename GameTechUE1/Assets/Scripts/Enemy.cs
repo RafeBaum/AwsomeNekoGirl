@@ -30,8 +30,6 @@ public class Enemy : MonoBehaviour {
 
 	void FixedUpdate(){
 		enemyRB.AddForce (Vector3.Normalize (move) * speed * Time.deltaTime);
-
-
 	}
 
 	void OnCollisionEnter (Collision col){
