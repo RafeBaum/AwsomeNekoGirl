@@ -5,22 +5,26 @@ using UnityEngine;
 public class EnemySpawner: MonoBehaviour {
 	float t;
 	public float spawnRate;
+	float spawnRateMod;
 	public GameObject enemy;
-	//Transform[] spawnList;
+	public GameController gc;
 
 	// Use this for initialization
 	void Start () {
 		t = 0;
-		//spawnList = GetComponentsInChildren<Transform> ();
+		spawnRateMod = 0;
+		
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
+		spawnRateMod = spawnRate - (float) gc.points / 20;
+
 		if (Time.time > t) {
 			Instantiate (enemy, transform.position, enemy.transform.rotation);
-			t += spawnRate;
+			t += spawnRateMod;
 		}
 		
 	}

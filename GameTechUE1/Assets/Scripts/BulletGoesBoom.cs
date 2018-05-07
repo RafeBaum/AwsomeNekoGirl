@@ -28,13 +28,14 @@ public class BulletGoesBoom : MonoBehaviour {
 
 	}
 
-	void OnCollisionEnter (Collision col){
+/*	void OnCollisionEnter (Collision col){
 		if (col.gameObject.CompareTag("Enemy")) {
+            
 			gc.PointCount (1);
 			Destroy (col.gameObject);
 			Destroy (gameObject);
 		}
-	}
+	}*/
 
 
 }

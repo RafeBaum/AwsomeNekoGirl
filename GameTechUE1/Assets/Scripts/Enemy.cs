@@ -3,29 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
+    public bool dest;
 	Rigidbody enemyRB;
 	Vector3 move;
 	GameObject[] targetList;
 	public float speed;
-	GameController gc;
+    float speedMod;
+    float DissolveTime = 0.2f;
+    GameController gc;
+    Renderer rend;
+  
 
 	// Use this for initialization
 	void Start() {
+        dest = false;
 		gc = GameObject.Find("GameController").GetComponent<GameController> ();
 
 		targetList = GameObject.FindGameObjectsWithTag ("Finish");
 
 		enemyRB = GetComponent<Rigidbody> ();
-		move = targetList [Random.Range (0, 3)].transform.position - transform.position;
+		move = targetList [Random.Range (0, 5)].transform.position - transform.position;
 
-		
+        rend = GetComponent<Renderer>();
 	}
 
 	void Update(){
-		if (Vector3.Distance (targetList[0].transform.position, transform.position) >= 2000) {
-			Destroy (gameObject);
-		}
-	}
+		speedMod = speed + gc.points * 100;
+        if (dest)
+        {
+            DissolveTime += Time.deltaTime;
+            rend.material.SetFloat("_DissolveAmount", DissolveTime);
+        }
+    }
 		
 
 	void FixedUpdate(){
@@ -37,6 +46,14 @@ public class Enemy : MonoBehaviour {
 			gc.TheEnd ();
 			Destroy (gameObject);
 		}
-			
-	}
+        if (col.gameObject.CompareTag("Bullet"))
+        {
+            dest = true;
+            gc.PointCount(1);
+            GetComponent<Collider>().enabled = false;
+            Destroy(col.gameObject);
+            Destroy(gameObject,2);
+        }
+
+    }
 }
