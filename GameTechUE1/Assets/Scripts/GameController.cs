@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
-	int points;
+	public int points;
 	public bool end;
 	public Text pointTxt, looseTxt;
 	public Button repeat, quit;
