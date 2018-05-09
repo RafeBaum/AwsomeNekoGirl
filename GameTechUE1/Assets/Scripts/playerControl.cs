@@ -13,7 +13,7 @@ public class playerControl : MonoBehaviour {
 	float moveH,moveV;
 	float nextBullet;
 	Vector3 moveVec;
-	public GameController gc;
+	bool end;
 
 
 	// Use this for initialization
@@ -26,7 +26,7 @@ public class playerControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!gc.end) {
+		if (!end) {
 			
 			moveH = Input.GetAxisRaw ("Horizontal");
 			moveV = Input.GetAxisRaw ("Vertical");
@@ -55,11 +55,18 @@ public class playerControl : MonoBehaviour {
 	}
 
 	public void Death(){
-		
+		end = true;
 		anim.Play ("die");
 		playerRB.isKinematic = true;
 		GetComponent<CapsuleCollider> ().enabled = false;
 
+	}
+
+	public void Respawn(){
+		end = false;
+		anim.Play ("idle");
+		playerRB.isKinematic = false;
+		GetComponent<CapsuleCollider> ().enabled = true;
 	}
 
 
