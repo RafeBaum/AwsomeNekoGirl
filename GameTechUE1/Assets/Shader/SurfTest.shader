@@ -1,4 +1,5 @@
 ﻿  Shader "Custom /Dissolving" {
+  // source: 
     Properties {
       _MainTex ("Texture (RGB)", 2D) = "white" {}
       _NoiseTex ("Dissolve Guide (RGB)", 2D) = "white" {}

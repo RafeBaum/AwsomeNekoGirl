@@ -20,7 +20,10 @@ public class EnemySpawner: MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		spawnRateMod = spawnRate - (float) gc.points / 20;
+		spawnRateMod = spawnRate - (float)gc.points / 20;
+		if (spawnRateMod <= 0.5f) 
+			spawnRateMod = 0.5f;
+
 
 		if (Time.time > t) {
 			Instantiate (enemy, transform.position, enemy.transform.rotation);
