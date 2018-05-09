@@ -1,5 +1,5 @@
 ﻿  Shader "Custom /Dissolving" {
-  // source: 
+  // source: http://wiki.unity3d.com/index.php?title=Dissolve_With_Texture
     Properties {
       _MainTex ("Texture (RGB)", 2D) = "white" {}
       _NoiseTex ("Dissolve Guide (RGB)", 2D) = "white" {}
@@ -16,12 +16,16 @@
           float2 uv_NoiseTex;
           float _DissolveAmount;
       };
+
       sampler2D _MainTex;
       sampler2D _NoiseTex;
       float _DissolveAmount;
+
       void surf (Input IN, inout SurfaceOutput o) {
+
           clip(tex2D (_NoiseTex, IN.uv_NoiseTex).rgb - _DissolveAmount);
           o.Albedo = tex2D (_MainTex, IN.uv_MainTex).rgb;
+
       }
       ENDCG
     } 

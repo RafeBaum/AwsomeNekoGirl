@@ -10,14 +10,16 @@ public class GameController : MonoBehaviour {
 	public Text pointTxt, looseTxt;
 	public Button repeat, quit;
 	public playerControl pc;
+	public GameObject player;
+	Transform playerStartpos;
 
 	// Use this for initialization
-	void Start () {
+	void Start (){
 		end = false;
 		looseTxt.gameObject.SetActive (false);
 		repeat.gameObject.SetActive (false);
 		quit.gameObject.SetActive (false);
-		
+		playerStartpos = player.transform;
 	}
 
 	void Update(){
@@ -40,6 +42,10 @@ public class GameController : MonoBehaviour {
 			looseTxt.gameObject.SetActive (true);
 			repeat.gameObject.SetActive (true);
 			quit.gameObject.SetActive (true);
+		} else {
+			looseTxt.gameObject.SetActive (false);
+			repeat.gameObject.SetActive (false);
+			quit.gameObject.SetActive (false);
 		}
 	}
 
@@ -63,6 +69,19 @@ public class GameController : MonoBehaviour {
 	}
 
 	void Repeat(){
-		SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
+
+		points = 0;
+		foreach (GameObject go in GameObject.FindGameObjectsWithTag("Enemy")) {
+			Destroy (go);
+		}
+		foreach (GameObject go in GameObject.FindGameObjectsWithTag("Bullet")) {
+			Destroy (go);
+		}
+			
+		player.transform.position = playerStartpos.position;
+		pc.Respawn();
+
+		Time.timeScale = 1;
+		end = false;
 	}
 }
